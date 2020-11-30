@@ -40,6 +40,10 @@ if !exists('g:markdown_mapping_switch_status')
   let g:markdown_mapping_switch_status = '<space>'
 endif
 
+if !exists('g:markdown_list_switch_order')
+  let g:markdown_list_switch_order = 'cycle'  " or 'toggle'
+endif
+
 if !exists('g:markdown_enable_spell_checking')
   let g:markdown_enable_spell_checking = 1
 endif

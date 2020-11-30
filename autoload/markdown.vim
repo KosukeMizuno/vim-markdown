@@ -509,13 +509,20 @@ function! markdown#SwitchStatus()
     return
   endif
   if match(current_line, '^\s*[*\-+] \[x\]') >= 0
-    call setline('.', substitute(current_line, '^\(\s*[*\-+]\) \[x\]', '\1', ''))
+    if g:markdown_list_switch_order == "cycle"
+      call setline('.', substitute(current_line, '^\(\s*[*\-+]\) \[x\]', '\1', ''))
+    else
+      call setline('.', substitute(current_line, '^\(\s*[*\-+]\) \[x\]', '\1 [ ]', ''))
+    endif
     return
   endif
   if match(current_line, '^\s*[*\-+] \(\[[x ]\]\)\@!') >= 0
-    call setline('.', substitute(current_line, '^\(\s*[*\-+]\)', '\1 [ ]', ''))
+    if g:markdown_list_switch_order == "cycle"
+      call setline('.', substitute(current_line, '^\(\s*[*\-+]\)', '\1 [ ]', ''))
+    endif
     return
   endif
+
   if match(current_line, '^\s*#\{1,5}\s') >= 0
     call setline('.', substitute(current_line, '^\(\s*#\{1,5}\) \(.*$\)', '\1# \2', ''))
     return
